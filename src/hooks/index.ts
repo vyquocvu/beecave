@@ -1,4 +1,5 @@
 export * from './useProtocol';
+export * from './useWebSocket';
 export * from './useMarketData';
 export * from './useOrderBook';
 export * from './useTrades';

@@ -145,6 +145,30 @@ REST     ──▶ ProtocolService        ──▶ TanStack Query     ──▶
 Form     ──▶ useTradeStore          ──▶ placeOrder         ──▶ ProtocolService.placeOrder ──▶ toast + invalidate
 ```
 
+### Quick code-reading guide
+
+If you want to understand the app quickly, read these files in order:
+
+1. `app/_layout.tsx` — top-level providers and root navigation wiring.
+2. `app/(tabs)/_layout.tsx` — primary tab shell and tab route structure.
+3. `app/(tabs)/trade.tsx` and `app/trade/[symbol].tsx` — how tab selection routes into symbol-specific trading UI.
+4. `src/store/useTradeStore.ts` and `src/store/useMarketStore.ts` — where form state and live market state are managed.
+5. `src/hooks/useTrading.ts` and `src/hooks/useOrderBook.ts` — orchestration layer between UI and services.
+6. `src/services/index.ts` and `src/services/types.ts` — protocol factory + shared service contract.
+7. `src/services/{hyperliquid,lighter,aster}/` — protocol-specific REST/WS/signing implementations.
+
+This top-down pass maps route flow → state → hooks → protocol adapters, which is the core architecture of the app.
+
+---
+
+## Product implementation spec (Vietnamese)
+
+A detailed Vietnamese implementation spec has been added at:
+
+- `docs/IMPLEMENTATION_SPEC.vi.md`
+
+This spec captures phased delivery, technical priorities, and a definition-of-done checklist for the current codebase.
+
 ---
 
 ## Build order (reference)
