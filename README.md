@@ -161,6 +161,16 @@ This top-down pass maps route flow → state → hooks → protocol adapters, wh
 
 ---
 
+## Product implementation spec (Vietnamese)
+
+A detailed Vietnamese implementation spec has been added at:
+
+- `docs/IMPLEMENTATION_SPEC.vi.md`
+
+This spec captures phased delivery, technical priorities, and a definition-of-done checklist for the current codebase.
+
+---
+
 ## Build order (reference)
 
 1. Scaffold configs (Expo, TS, Tailwind, Babel, env)
