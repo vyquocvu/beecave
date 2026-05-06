@@ -50,7 +50,7 @@
     "react-native-svg": "15.2.0",
     "axios": "^1.7.2",
     "@gorhom/bottom-sheet": "^4.6.4",
-    "react-native-worklets": "0.4.1"
+    "react-native-worklets": "file:./stubs/react-native-worklets"
   },
   "devDependencies": {
     "@babel/core": "^7.24.0",
