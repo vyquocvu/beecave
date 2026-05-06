@@ -1,33 +1,20 @@
 import React, { useEffect } from 'react';
 import '@walletconnect/react-native-compat';
-import { WagmiProvider } from 'wagmi';
+import { createConfig, http, WagmiProvider } from 'wagmi';
 import { arbitrum, mainnet } from 'wagmi/chains';
-import {
-  createAppKit,
-  defaultWagmiConfig,
-  AppKit,
-} from '@web3modal/wagmi-react-native';
+import { createAppKit, AppKit } from '@web3modal/wagmi-react-native';
 import { useAccount, useWalletClient } from 'wagmi';
 import { useWalletStore } from '@/store/useWalletStore';
 import { APP_CONFIG } from '@/constants/config';
 
-const metadata = {
-  name: 'PerpDEX',
-  description: 'Decentralized Perpetual Exchange',
-  url: 'https://perpdex.app',
-  icons: ['https://perpdex.app/icon.png'],
-  redirect: {
-    native: `${APP_CONFIG.scheme}://`,
-    universal: 'https://perpdex.app',
-  },
-};
-
 const chains = [arbitrum, mainnet] as const;
 
-const wagmiConfig = defaultWagmiConfig({
+const wagmiConfig = createConfig({
   chains,
-  projectId: APP_CONFIG.wcProjectId,
-  metadata,
+  transports: {
+    [arbitrum.id]: http(),
+    [mainnet.id]: http(),
+  },
 });
 
 if (APP_CONFIG.wcProjectId) {
@@ -51,6 +38,7 @@ function WalletStateSync() {
   }, [address, isConnected, setAddress, setConnected]);
 
   // walletClient is consumed via useSigner() elsewhere
+  void walletClient;
   return null;
 }
 
