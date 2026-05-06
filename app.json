@@ -28,7 +28,8 @@
         "backgroundColor": "#0A0B0E"
       },
       "package": "app.perpdex.mobile",
-      "versionCode": 1
+      "versionCode": 1,
+      "googleServicesFile": "./google-services.json"
     },
     "web": {
       "bundler": "metro",
