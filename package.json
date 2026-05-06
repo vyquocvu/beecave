@@ -51,7 +51,12 @@
     "@gorhom/bottom-sheet": "^4.6.4",
     "react-native-worklets": "file:./stubs/react-native-worklets",
     "ajv": "^8.16.0",
-    "ajv-keywords": "^5.1.0"
+    "ajv-keywords": "^5.1.0",
+    "react-native-get-random-values": "~1.11.0",
+    "react-native-url-polyfill": "^2.1.0",
+    "buffer": "^6.0.3",
+    "@react-native-async-storage/async-storage": "1.23.1",
+    "@react-native-community/netinfo": "11.3.1"
   },
   "devDependencies": {
     "@babel/core": "^7.24.0",
