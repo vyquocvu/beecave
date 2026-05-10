@@ -51,7 +51,11 @@ export const PROTOCOLS: Record<Protocol, ProtocolConfig> = {
   },
 };
 
+const VALID_PROTOCOLS: Protocol[] = ['hyperliquid', 'lighter', 'aster'];
+const _rawProtocol = process.env.EXPO_PUBLIC_DEFAULT_PROTOCOL;
 export const DEFAULT_PROTOCOL: Protocol =
-  (process.env.EXPO_PUBLIC_DEFAULT_PROTOCOL as Protocol) ?? 'hyperliquid';
+  _rawProtocol && VALID_PROTOCOLS.includes(_rawProtocol as Protocol)
+    ? (_rawProtocol as Protocol)
+    : 'hyperliquid';
 
 export const ALL_PROTOCOLS = Object.values(PROTOCOLS);
