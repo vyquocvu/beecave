@@ -1,7 +1,3 @@
-import 'react-native-get-random-values';
-import 'react-native-url-polyfill/auto';
-import { Buffer } from 'buffer';
-global.Buffer = global.Buffer || Buffer;
 
 import '../global.css';
 import React from 'react';
@@ -10,15 +6,26 @@ import { StatusBar } from 'expo-status-bar';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
-import { QueryProvider, WalletProvider } from '@/providers';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { WalletProvider } from '@/providers';
 import { ToastHost } from '@/components/ui';
 import { colors } from '@/constants/theme';
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: 1,
+      staleTime: 5_000,
+      refetchOnWindowFocus: false,
+    },
+  },
+});
 
 export default function RootLayout() {
   return (
     <GestureHandlerRootView style={{ flex: 1, backgroundColor: colors.bg.primary }}>
       <SafeAreaProvider>
-        <QueryProvider>
+        <QueryClientProvider client={queryClient}>
           <WalletProvider>
             <BottomSheetModalProvider>
               <StatusBar style="light" />
@@ -41,7 +48,7 @@ export default function RootLayout() {
               <ToastHost />
             </BottomSheetModalProvider>
           </WalletProvider>
-        </QueryProvider>
+        </QueryClientProvider>
       </SafeAreaProvider>
     </GestureHandlerRootView>
   );

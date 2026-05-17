@@ -8,7 +8,7 @@ import type {
 import type { Order } from '@/types/order';
 import { PROTOCOLS } from '@/constants/protocols';
 import { ReconnectingWebSocket } from '@/services/ws';
-import { normalizeL2Book } from './api';
+import { normalizeL2Book } from './normalize';
 import { toNumber } from '@/utils/format';
 import type { HLL2Book, HLCandle } from './types';
 

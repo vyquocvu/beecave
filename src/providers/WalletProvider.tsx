@@ -22,7 +22,11 @@ const metadata = {
   },
 };
 
-const chains = [arbitrum, mainnet] as const;
+// @web3modal/wagmi-react-native 2.0.5 still expects viem v1's chain.displayName
+const chains = [
+  { ...arbitrum, displayName: arbitrum.name },
+  { ...mainnet, displayName: mainnet.name },
+] as unknown as readonly [typeof arbitrum, typeof mainnet];
 
 const wagmiConfig = defaultWagmiConfig({
   chains,
