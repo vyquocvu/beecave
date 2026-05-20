@@ -279,7 +279,7 @@ export class AsterService implements ProtocolService {
       size: params.size,
       trigger_price: params.triggerPrice,
       reduce_only: params.reduceOnly,
-      time_in_force: params.timeInForce ?? 'GTC',
+      time_in_force: params.timeInForce && params.timeInForce !== 'ALO' ? params.timeInForce : 'GTC',
       leverage: params.leverage,
       nonce: Date.now(),
     };

@@ -1,6 +1,6 @@
 # PerpDEX — Multi-Protocol Perpetuals Trading App
 
-A production-grade React Native (Expo) mobile trading app for perpetual DEXes. UI inspired by OKX Mobile, with first-class support for three protocols:
+A production-grade React Native (Expo) mobile trading app for perpetual DEXes. UI inspired by a leading exchange mobile app, with first-class support for three protocols:
 
 - **Hyperliquid**
 - **Lighter**

@@ -36,6 +36,7 @@ export default function ProfileScreen() {
     { key: 'trading', icon: 'options-outline', label: 'Trading Settings', onPress: () => router.push('/settings') },
     { key: 'notifications', icon: 'notifications-outline', label: 'Notifications', onPress: () => router.push('/settings/notifications') },
     { key: 'security', icon: 'shield-checkmark-outline', label: 'Security', onPress: () => router.push('/settings/security') },
+    { key: 'ui-ref', icon: 'apps-outline', label: 'UI Reference', onPress: () => router.push('/base') },
     { key: 'stats', icon: 'stats-chart-outline', label: 'Trading Stats', onPress: () => showToast({ type: 'info', message: 'Coming soon' }) },
     { key: 'network', icon: 'globe-outline', label: 'Network', value: APP_CONFIG.environment, onPress: () => showToast({ type: 'info', message: `Environment: ${APP_CONFIG.environment}` }) },
     { key: 'help', icon: 'help-circle-outline', label: 'Help & Support', onPress: () => showToast({ type: 'info', message: 'Reach us at support@perpdex.app' }) },

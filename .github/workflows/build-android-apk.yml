@@ -21,6 +21,15 @@ jobs:
       - name: Install dependencies
         run: npm install --legacy-peer-deps
 
+      - name: Typecheck
+        run: npm run type-check
+
+      - name: Unit tests
+        run: npm test -- --runInBand
+
+      - name: Lint
+        run: npm run lint
+
       - name: Setup Java
         uses: actions/setup-java@v4
         with:

@@ -6,7 +6,7 @@ interface UseWebSocketOptions {
   onMessage?: (event: WebSocketMessageEvent) => void;
   onOpen?: () => void;
   onClose?: () => void;
-  onError?: (event: WebSocketErrorEvent) => void;
+  onError?: (event: Event) => void;
 }
 
 export function useWebSocket(url?: string, options: UseWebSocketOptions = {}) {

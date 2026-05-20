@@ -37,6 +37,7 @@ export default function RootLayout() {
                 }}
               >
                 <Stack.Screen name="(tabs)" />
+                <Stack.Screen name="base" />
                 <Stack.Screen name="onboarding" />
                 <Stack.Screen name="trade/[symbol]" />
                 <Stack.Screen name="wallet/deposit" options={{ presentation: 'modal' }} />

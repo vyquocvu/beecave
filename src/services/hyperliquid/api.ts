@@ -4,6 +4,7 @@ import type {
   Candle,
   CandleInterval,
   FundingRate,
+  Orderbook,
 } from '@/types/market';
 import type { Order, OrderParams, OrderResult } from '@/types/order';
 import type { Position } from '@/types/position';
@@ -20,6 +21,7 @@ import type {
   HLCandle,
   HLOrderRequest,
   HLCancelRequest,
+  HLL2Book,
 } from './types';
 import { signHLAction, buildCoinIndex, hlIsBuyFromSide } from './utils';
 import { normalizeL2Book } from './normalize';

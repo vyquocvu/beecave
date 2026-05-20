@@ -3,9 +3,9 @@ import '@walletconnect/react-native-compat';
 import { WagmiProvider } from 'wagmi';
 import { arbitrum, mainnet } from 'wagmi/chains';
 import {
-  createAppKit,
+  createWeb3Modal,
   defaultWagmiConfig,
-  AppKit,
+  Web3Modal,
 } from '@web3modal/wagmi-react-native';
 import { useAccount, useWalletClient } from 'wagmi';
 import { useWalletStore } from '@/store/useWalletStore';
@@ -34,18 +34,21 @@ const wagmiConfig = defaultWagmiConfig({
   metadata,
 });
 
-if (APP_CONFIG.wcProjectId) {
-  createAppKit({
+const isWeb3ModalEnabled = Boolean(APP_CONFIG.wcProjectId);
+
+if (isWeb3ModalEnabled) {
+  createWeb3Modal({
     projectId: APP_CONFIG.wcProjectId,
     wagmiConfig,
     defaultChain: arbitrum,
     enableAnalytics: false,
+    metadata,
   });
 }
 
 function WalletStateSync() {
   const { address, isConnected } = useAccount();
-  const { data: walletClient } = useWalletClient();
+  useWalletClient();
   const setAddress = useWalletStore((s) => s.setAddress);
   const setConnected = useWalletStore((s) => s.setConnected);
 
@@ -54,7 +57,6 @@ function WalletStateSync() {
     setConnected(isConnected);
   }, [address, isConnected, setAddress, setConnected]);
 
-  // walletClient is consumed via useSigner() elsewhere
   return null;
 }
 
@@ -63,7 +65,7 @@ export function WalletProvider({ children }: { children: React.ReactNode }) {
     <WagmiProvider config={wagmiConfig}>
       <WalletStateSync />
       {children}
-      <AppKit />
+      {isWeb3ModalEnabled ? <Web3Modal /> : null}
     </WagmiProvider>
   );
 }
