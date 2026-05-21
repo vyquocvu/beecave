@@ -1,6 +1,6 @@
-import React, { useEffect, useMemo, useState } from 'react';
-import { View, ScrollView, StyleSheet, Pressable, Text } from 'react-native';
-import { useLocalSearchParams, useRouter } from 'expo-router';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import { BackHandler, Platform, View, ScrollView, StyleSheet, Pressable, Text } from 'react-native';
+import { useLocalSearchParams, usePathname, useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { SafeArea } from '@/components/layout/SafeArea';
 import { Header } from '@/components/layout/Header';
@@ -52,6 +52,26 @@ export default function TradeDetailScreen() {
 
   const livePrice = livePrices[symbol] ?? market?.markPrice;
 
+  const handleBack = useCallback(() => {
+    const canGoBack = (router as any).canGoBack?.();
+    if (canGoBack) {
+      router.back();
+      return;
+    }
+    router.replace('/(tabs)');
+  }, [router]);
+
+  const pathname = usePathname();
+  useEffect(() => {
+    if (Platform.OS !== 'android') return;
+    const sub = BackHandler.addEventListener('hardwareBackPress', () => {
+      if (!pathname.startsWith('/trade/')) return false;
+      handleBack();
+      return true;
+    });
+    return () => sub.remove();
+  }, [handleBack, pathname]);
+
   const handleSubmit = () => {
     placeOrder({
       symbol,
@@ -71,7 +91,7 @@ export default function TradeDetailScreen() {
     <SafeArea>
       <Header
         leftIcon="chevron-back"
-        onLeftPress={() => router.back()}
+        onLeftPress={handleBack}
         center={
           <Pressable onPress={() => sheetRef.current?.open()} style={styles.pairBtn}>
             <Text style={styles.pairText}>{symbol}-PERP</Text>

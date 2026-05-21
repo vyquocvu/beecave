@@ -1,7 +1,7 @@
-import React, { useEffect, useMemo, useState } from 'react';
-import { Pressable, ScrollView, StyleSheet, TextInput, View } from 'react-native';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import { BackHandler, Platform, Pressable, ScrollView, StyleSheet, TextInput, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { useLocalSearchParams, useRouter } from 'expo-router';
+import { useLocalSearchParams, usePathname, useRouter } from 'expo-router';
 import { BottomSheet } from '@/components/ui';
 import type { BottomSheetHandle } from '@/components/ui';
 import { TradingPairSelector } from '@/components/trading/TradingPairSelector';
@@ -54,6 +54,26 @@ export default function BaseTradeDetailScreen() {
 
   const livePrice = livePrices[symbol] ?? market?.markPrice;
 
+  const handleBack = useCallback(() => {
+    const canGoBack = (router as any).canGoBack?.();
+    if (canGoBack) {
+      router.back();
+      return;
+    }
+    router.replace('/base/(tabs)/home');
+  }, [router]);
+
+  const pathname = usePathname();
+  useEffect(() => {
+    if (Platform.OS !== 'android') return;
+    const sub = BackHandler.addEventListener('hardwareBackPress', () => {
+      if (!pathname.startsWith('/base/trade/')) return false;
+      handleBack();
+      return true;
+    });
+    return () => sub.remove();
+  }, [handleBack, pathname]);
+
   const submit = () => {
     placeOrder({
       symbol,
@@ -72,7 +92,7 @@ export default function BaseTradeDetailScreen() {
   return (
     <BaseScreen contentStyle={{ paddingHorizontal: 0 }}>
       <View style={styles.header}>
-        <Pressable onPress={() => router.back()} hitSlop={10} style={styles.headerBtn}>
+        <Pressable onPress={handleBack} hitSlop={10} style={styles.headerBtn}>
           <Ionicons name="chevron-back" size={20} color={baseColors.text.primary} />
         </Pressable>
 

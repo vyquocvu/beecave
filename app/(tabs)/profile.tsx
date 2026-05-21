@@ -24,11 +24,14 @@ interface MenuItem {
   value?: string;
 }
 
-export default function ProfileScreen() {
+function ProfileScreenBase({
+  onConnectPress,
+}: {
+  onConnectPress: () => void;
+}) {
   const router = useRouter();
   const address = useWalletStore((s) => s.address);
   const isConnected = useWalletStore((s) => s.isConnected);
-  const { open } = useWeb3Modal();
   const { disconnect } = useDisconnect();
   const reset = useAppStore((s) => s.reset);
 
@@ -73,7 +76,7 @@ export default function ProfileScreen() {
           {isConnected ? (
             <Button title="Disconnect" variant="outline" size="sm" onPress={() => disconnect()} />
           ) : (
-            <Button title="Connect Wallet" variant="primary" size="md" onPress={() => open()} />
+            <Button title="Connect Wallet" variant="primary" size="md" onPress={onConnectPress} />
           )}
         </Card>
 
@@ -105,6 +108,29 @@ export default function ProfileScreen() {
       </ScrollView>
     </SafeArea>
   );
+}
+
+function ProfileScreenWithWeb3Modal() {
+  const { open } = useWeb3Modal();
+  return <ProfileScreenBase onConnectPress={() => open()} />;
+}
+
+function ProfileScreenWithoutWeb3Modal() {
+  return (
+    <ProfileScreenBase
+      onConnectPress={() =>
+        showToast({
+          type: 'info',
+          message: 'WalletConnect is not configured. Set EXPO_PUBLIC_WC_PROJECT_ID to enable wallet connection.',
+        })
+      }
+    />
+  );
+}
+
+export default function ProfileScreen() {
+  const isWeb3ModalEnabled = Boolean(APP_CONFIG.wcProjectId);
+  return isWeb3ModalEnabled ? <ProfileScreenWithWeb3Modal /> : <ProfileScreenWithoutWeb3Modal />;
 }
 
 const styles = StyleSheet.create({
