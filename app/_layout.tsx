@@ -12,6 +12,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Ionicons } from '@expo/vector-icons';
 import { WalletProvider } from '@/providers';
 import { ToastHost } from '@/components/ui';
+import { CopyTradingEngine } from '@/components/copyTrading/CopyTradingEngine';
 import { colors } from '@/constants/theme';
 
 SplashScreen.preventAutoHideAsync();
@@ -43,6 +44,7 @@ export default function RootLayout() {
           <WalletProvider>
             <BottomSheetModalProvider>
               <StatusBar style="light" />
+              <CopyTradingEngine />
               <Stack
                 screenOptions={{
                   headerShown: false,
@@ -54,6 +56,8 @@ export default function RootLayout() {
                 <Stack.Screen name="base" />
                 <Stack.Screen name="onboarding" />
                 <Stack.Screen name="trade/[symbol]" />
+                <Stack.Screen name="leaderboard/index" />
+                <Stack.Screen name="trader/[address]" />
                 <Stack.Screen name="wallet/deposit" options={{ presentation: 'modal' }} />
                 <Stack.Screen name="wallet/withdraw" options={{ presentation: 'modal' }} />
                 <Stack.Screen name="settings/index" />
