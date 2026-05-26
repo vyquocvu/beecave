@@ -7,6 +7,7 @@ import { ProtocolSwitcher } from '@/components/trading/ProtocolSwitcher';
 import { BalanceDisplay } from '@/components/wallet/BalanceDisplay';
 import { MarketCard } from '@/components/market/MarketCard';
 import { MarketList } from '@/components/market/MarketList';
+import { LeaderboardPreview } from '@/components/leaderboard/LeaderboardPreview';
 import { Button, Skeleton, Tabs } from '@/components/ui';
 import { useMarkets, useLivePrices } from '@/hooks';
 import { useWalletSnapshot } from '@/hooks';
@@ -83,6 +84,8 @@ export default function HomeScreen() {
               ))
             : trending.map((m) => <MarketCard key={m.symbol} market={m} />)}
         </ScrollView>
+
+        <LeaderboardPreview />
 
         <View style={{ paddingHorizontal: spacing.lg, marginTop: spacing.lg }}>
           <Tabs

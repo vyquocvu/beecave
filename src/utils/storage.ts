@@ -40,4 +40,6 @@ export const StorageKeys = {
   theme: 'app.theme',
   protocol: 'app.protocol',
   onboardingComplete: 'app.onboardingComplete',
+  leaderboard: 'app.leaderboard',
+  copyTrading: 'app.copyTrading',
 } as const;
