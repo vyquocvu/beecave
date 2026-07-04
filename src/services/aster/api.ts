@@ -112,7 +112,7 @@ export class AsterService implements ProtocolService {
   async getRecentTrades(symbol: string, limit = 50): Promise<Trade[]> {
     try {
       const res = await getJson<
-        Array<{ id: string; price: string; size: string; side: string; time: number }>
+        { id: string; price: string; size: string; side: string; time: number }[]
       >(`${CFG.apiUrl}/v1/trades?symbol=${symbol}&limit=${limit}`);
       return res.map((t) => ({
         id: t.id,

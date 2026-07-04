@@ -71,8 +71,8 @@ export function roundToTick(price: number, tickSize: number): number {
 }
 
 export function buildOrderbookWithTotals(
-  levels: Array<{ price: string; size: string }>,
-): Array<{ price: string; size: string; total: string }> {
+  levels: { price: string; size: string }[],
+): { price: string; size: string; total: string }[] {
   let running = 0;
   return levels.map((l) => {
     running += toNumber(l.size);

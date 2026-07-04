@@ -14,7 +14,6 @@ import { useLeaderboard } from '@/hooks/useLeaderboard';
 import { useLeaderboardStore } from '@/store/useLeaderboardStore';
 import { useCopyTradingStore } from '@/store/useCopyTradingStore';
 import { colors, spacing } from '@/constants/theme';
-import { useRouter } from 'expo-router';
 import type { LeaderboardEntry } from '@/types/leaderboard';
 
 export default function LeaderboardScreen() {
