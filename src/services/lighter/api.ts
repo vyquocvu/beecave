@@ -106,7 +106,7 @@ export class LighterService implements ProtocolService {
     try {
       const marketId = await this.marketIdFromSymbol(symbol);
       const res = await getJson<
-        Array<{ id: string; price: string; size: string; is_ask: boolean; timestamp: number }>
+        { id: string; price: string; size: string; is_ask: boolean; timestamp: number }[]
       >(`${CFG.apiUrl}/trades?marketId=${marketId}&limit=${limit}`);
       return res.map((t) => ({
         id: t.id,

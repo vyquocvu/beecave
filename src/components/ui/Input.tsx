@@ -31,12 +31,22 @@ export function Input({
   onIncrement,
   onDecrement,
   style,
+  onFocus,
+  onBlur,
   ...rest
 }: InputProps) {
+  const [isFocused, setIsFocused] = React.useState(false);
+
   return (
     <View style={containerStyle}>
       {label && <Text style={styles.label}>{label}</Text>}
-      <View style={[styles.row, error ? styles.rowError : null]}>
+      <View
+        style={[
+          styles.row,
+          isFocused && styles.rowFocused,
+          error ? styles.rowError : null,
+        ]}
+      >
         {onDecrement && (
           <Pressable onPress={onDecrement} style={styles.adjBtn}>
             <Text style={styles.adjBtnText}>−</Text>
@@ -46,6 +56,14 @@ export function Input({
         <TextInput
           placeholderTextColor={colors.text.tertiary}
           style={[styles.input, style]}
+          onFocus={(e) => {
+            setIsFocused(true);
+            onFocus?.(e);
+          }}
+          onBlur={(e) => {
+            setIsFocused(false);
+            onBlur?.(e);
+          }}
           {...rest}
         />
         {rightAdornment}
@@ -79,6 +97,9 @@ const styles = StyleSheet.create({
     borderColor: colors.border.subtle,
     paddingHorizontal: spacing.md,
     minHeight: 48,
+  },
+  rowFocused: {
+    borderColor: colors.brand.primary,
   },
   rowError: {
     borderColor: colors.down,

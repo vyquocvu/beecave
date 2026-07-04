@@ -1,5 +1,6 @@
 import React from 'react';
-import { Pressable, Text, ActivityIndicator, StyleSheet, ViewStyle, TextStyle } from 'react-native';
+import { Text, ActivityIndicator, StyleSheet, ViewStyle, TextStyle } from 'react-native';
+import { MotiPressable } from 'moti/interactions';
 import { colors, radius, spacing } from '@/constants/theme';
 import { hapticLight } from '@/utils/haptics';
 
@@ -38,22 +39,29 @@ export function Button({
   const sizeStyle = sizes[size];
 
   return (
-    <Pressable
+    <MotiPressable
       onPress={() => {
         if (isDisabled) return;
         if (haptic) hapticLight();
         onPress?.();
       }}
       disabled={isDisabled}
-      style={({ pressed }) => [
+      style={[
         styles.base,
         paletteStyle.container,
         sizeStyle.container,
         fullWidth && { alignSelf: 'stretch' },
-        pressed && { opacity: 0.85 },
         isDisabled && { opacity: 0.4 },
         style,
       ]}
+      animate={({ pressed }) => {
+        'worklet';
+        return {
+          scale: pressed && !isDisabled ? 0.96 : 1,
+          opacity: pressed && !isDisabled ? 0.85 : 1,
+        };
+      }}
+      transition={{ type: 'timing', duration: 150 }}
     >
       {loading ? (
         <ActivityIndicator color={paletteStyle.textColor} size="small" />
@@ -64,7 +72,7 @@ export function Button({
           {title}
         </Text>
       )}
-    </Pressable>
+    </MotiPressable>
   );
 }
 

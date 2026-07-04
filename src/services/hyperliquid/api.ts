@@ -104,7 +104,7 @@ export class HyperliquidService implements ProtocolService {
   async getRecentTrades(symbol: string, limit = 50): Promise<Trade[]> {
     try {
       const trades = await this.info<
-        Array<{ coin: string; side: 'A' | 'B'; px: string; sz: string; time: number; tid: number }>
+        { coin: string; side: 'A' | 'B'; px: string; sz: string; time: number; tid: number }[]
       >({ type: 'recentTrades', coin: symbol });
       return trades.slice(0, limit).map((t) => ({
         id: String(t.tid),
@@ -196,7 +196,7 @@ export class HyperliquidService implements ProtocolService {
   async getUserOrderHistory(address: string): Promise<Order[]> {
     try {
       const fills = await this.info<
-        Array<{ coin: string; side: 'A' | 'B'; px: string; sz: string; time: number; oid: number }>
+        { coin: string; side: 'A' | 'B'; px: string; sz: string; time: number; oid: number }[]
       >({ type: 'userFills', user: address });
       return fills.map((f) => ({
         id: String(f.oid),
@@ -282,7 +282,7 @@ export class HyperliquidService implements ProtocolService {
 
     const res = await this.exchange<{
       status: string;
-      response?: { data?: { statuses?: Array<{ resting?: { oid: number }; filled?: any }> } };
+      response?: { data?: { statuses?: { resting?: { oid: number }; filled?: any }[] } };
     }>({ action, nonce, signature });
 
     const status = res.response?.data?.statuses?.[0];

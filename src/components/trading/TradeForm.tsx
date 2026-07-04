@@ -20,7 +20,7 @@ interface TradeFormProps {
   isSubmitting?: boolean;
 }
 
-const ORDER_TYPES: Array<{ key: OrderType; label: string }> = [
+const ORDER_TYPES: { key: OrderType; label: string }[] = [
   { key: 'limit', label: 'Limit' },
   { key: 'market', label: 'Market' },
   { key: 'stop-limit', label: 'Stop-Limit' },

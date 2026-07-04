@@ -1,7 +1,7 @@
 export interface LighterOrderbook {
   market_id: number;
-  asks: Array<{ price: string; size: string }>;
-  bids: Array<{ price: string; size: string }>;
+  asks: { price: string; size: string }[];
+  bids: { price: string; size: string }[];
   timestamp: number;
 }
 

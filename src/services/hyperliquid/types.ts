@@ -1,10 +1,10 @@
 export interface HLMeta {
-  universe: Array<{
+  universe: {
     name: string;
     szDecimals: number;
     maxLeverage: number;
     marginTableId?: number;
-  }>;
+  }[];
 }
 
 export interface HLAssetCtx {
@@ -22,8 +22,8 @@ export interface HLAssetCtx {
 export interface HLL2Book {
   coin: string;
   levels: [
-    Array<{ px: string; sz: string; n: number }>,
-    Array<{ px: string; sz: string; n: number }>,
+    { px: string; sz: string; n: number }[],
+    { px: string; sz: string; n: number }[],
   ];
   time: number;
 }
@@ -43,7 +43,7 @@ export interface HLPosition {
 }
 
 export interface HLClearinghouseState {
-  assetPositions: Array<{ position: HLPosition; type: string }>;
+  assetPositions: { position: HLPosition; type: string }[];
   crossMarginSummary: {
     accountValue: string;
     totalNtlPos: string;

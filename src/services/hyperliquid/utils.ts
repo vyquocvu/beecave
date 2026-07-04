@@ -68,7 +68,7 @@ export function hlIsBuyFromSide(side: 'long' | 'short'): boolean {
   return side === 'long';
 }
 
-export function buildCoinIndex(meta: { universe: Array<{ name: string }> }): Record<string, number> {
+export function buildCoinIndex(meta: { universe: { name: string }[] }): Record<string, number> {
   const map: Record<string, number> = {};
   meta.universe.forEach((u, i) => {
     map[u.name] = i;

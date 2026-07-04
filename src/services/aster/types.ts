@@ -18,8 +18,8 @@ export interface AsterMarketRaw {
 
 export interface AsterOrderbookRaw {
   symbol: string;
-  bids: Array<[string, string]>;
-  asks: Array<[string, string]>;
+  bids: [string, string][];
+  asks: [string, string][];
   timestamp: number;
 }
 

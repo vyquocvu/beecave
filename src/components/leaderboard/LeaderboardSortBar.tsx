@@ -8,7 +8,7 @@ interface LeaderboardSortBarProps {
   onChange: (k: LeaderboardSortKey) => void;
 }
 
-const OPTIONS: Array<{ key: LeaderboardSortKey; label: string }> = [
+const OPTIONS: { key: LeaderboardSortKey; label: string }[] = [
   { key: 'equity', label: 'Equity' },
   { key: 'pnlPct', label: 'PnL %' },
   { key: 'openPositions', label: 'Positions' },

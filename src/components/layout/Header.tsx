@@ -8,7 +8,7 @@ interface HeaderProps {
   subtitle?: string;
   leftIcon?: keyof typeof Ionicons.glyphMap;
   onLeftPress?: () => void;
-  rightActions?: Array<{ icon: keyof typeof Ionicons.glyphMap; onPress: () => void }>;
+  rightActions?: { icon: keyof typeof Ionicons.glyphMap; onPress: () => void }[];
   center?: React.ReactNode;
 }
 
@@ -57,6 +57,6 @@ const styles = StyleSheet.create({
   },
   side: { minWidth: 48, flexDirection: 'row', alignItems: 'center' },
   center: { flex: 1, alignItems: 'center', justifyContent: 'center' },
-  title: { color: colors.text.primary, fontSize: 16, fontWeight: '600' },
-  subtitle: { color: colors.text.secondary, fontSize: 12, marginTop: 2 },
+  title: { color: colors.text.primary, fontSize: 18, fontWeight: '600' },
+  subtitle: { color: colors.text.secondary, fontSize: 14, marginTop: 2 },
 });
