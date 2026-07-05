@@ -9,26 +9,26 @@ module.exports = {
     extend: {
       colors: {
         brand: {
-          DEFAULT: '#F0B429',
-          secondary: '#E8A800',
+          DEFAULT: '#FCD535',
+          secondary: '#f0b90b',
         },
-        up: '#0ECB81',
-        down: '#F6465D',
+        up: '#0ecb81',
+        down: '#f6465d',
         bg: {
-          primary: '#0A0B0E',
-          secondary: '#13151A',
-          tertiary: '#1C1F28',
-          overlay: '#242731',
+          primary: '#0b0e11',
+          secondary: '#1e2329',
+          tertiary: '#2b3139',
+          overlay: '#1e2329',
         },
         border: {
-          DEFAULT: '#252836',
-          subtle: '#1E2130',
+          DEFAULT: '#2b3139',
+          subtle: '#1e2329',
         },
         text: {
-          primary: '#FFFFFF',
-          secondary: '#8B92A5',
-          tertiary: '#5A6072',
-          disabled: '#3D4255',
+          primary: '#ffffff',
+          secondary: '#eaecef',
+          tertiary: '#707a8a',
+          disabled: '#929aa5',
         },
         protocol: {
           hyperliquid: '#00D4AA',
