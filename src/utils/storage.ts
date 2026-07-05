@@ -1,19 +1,22 @@
-import { MMKV } from 'react-native-mmkv';
-
-const mmkv = new MMKV({ id: 'perpdex-storage' });
+import * as SecureStore from 'expo-secure-store';
 
 export const storage = {
-  getString: (key: string) => mmkv.getString(key),
-  setString: (key: string, value: string) => mmkv.set(key, value),
-  getNumber: (key: string) => mmkv.getNumber(key),
-  setNumber: (key: string, value: number) => mmkv.set(key, value),
-  getBoolean: (key: string) => mmkv.getBoolean(key),
-  setBoolean: (key: string, value: boolean) => mmkv.set(key, value),
-  delete: (key: string) => mmkv.delete(key),
-  clearAll: () => mmkv.clearAll(),
+  getString: (key: string) => SecureStore.getItemAsync(key),
+  setString: (key: string, value: string) => SecureStore.setItemAsync(key, value),
+  getNumber: async (key: string) => {
+    const val = await SecureStore.getItemAsync(key);
+    return val ? Number(val) : undefined;
+  },
+  setNumber: (key: string, value: number) => SecureStore.setItemAsync(key, String(value)),
+  getBoolean: async (key: string) => {
+    const val = await SecureStore.getItemAsync(key);
+    return val ? val === 'true' : undefined;
+  },
+  setBoolean: (key: string, value: boolean) => SecureStore.setItemAsync(key, String(value)),
+  delete: (key: string) => SecureStore.deleteItemAsync(key),
 
-  getJSON<T>(key: string): T | undefined {
-    const raw = mmkv.getString(key);
+  async getJSON<T>(key: string): Promise<T | undefined> {
+    const raw = await SecureStore.getItemAsync(key);
     if (!raw) return undefined;
     try {
       return JSON.parse(raw) as T;
@@ -23,15 +26,14 @@ export const storage = {
   },
 
   setJSON<T>(key: string, value: T) {
-    mmkv.set(key, JSON.stringify(value));
+    return SecureStore.setItemAsync(key, JSON.stringify(value));
   },
 };
 
-// Zustand persist adapter
 export const zustandStorage = {
-  setItem: (name: string, value: string) => mmkv.set(name, value),
-  getItem: (name: string) => mmkv.getString(name) ?? null,
-  removeItem: (name: string) => mmkv.delete(name),
+  setItem: (name: string, value: string) => SecureStore.setItemAsync(name, value),
+  getItem: (name: string) => SecureStore.getItemAsync(name),
+  removeItem: (name: string) => SecureStore.deleteItemAsync(name),
 };
 
 export const StorageKeys = {

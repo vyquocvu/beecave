@@ -16,7 +16,7 @@ One wallet, one UI, three order books.
 | ---------------- | ------------------------------------------------------- |
 | Runtime          | Expo SDK 51+, React Native 0.74, TypeScript (strict)    |
 | Navigation       | Expo Router v3 (file-based, typed routes)               |
-| State            | Zustand + `zustand/middleware` persist (MMKV-backed)    |
+| State            | Zustand + `zustand/middleware` persist (SecureStore-backed)    |
 | Async data       | TanStack Query v5                                       |
 | Styling          | NativeWind v4 (Tailwind) + design tokens                |
 | Animation        | Reanimated 3, Gesture Handler                           |
@@ -24,7 +24,7 @@ One wallet, one UI, three order books.
 | Sheets / modals  | `@gorhom/bottom-sheet`                                  |
 | Lists            | `@shopify/flash-list`                                   |
 | Charts           | `react-native-wagmi-charts` (candles, optional)         |
-| Storage          | `react-native-mmkv`                                     |
+| Storage          | `expo-secure-store`                                     |
 
 ---
 
@@ -131,7 +131,7 @@ UI gets a unified `WalletSigner` from `useSigner()`, which wraps wagmi's `Wallet
 
 ### State split
 
-- **`useAppStore`** — user-facing preferences (selected protocol, theme, favorites, recents). Persisted to MMKV.
+- **`useAppStore`** — user-facing preferences (selected protocol, theme, favorites, recents). Persisted to SecureStore.
 - **`useTradeStore`** — working trade form; derives `notional`, `margin`, `liquidationPrice` on every setter.
 - **`useMarketStore`** — cached markets + live prices pushed by WebSocket.
 - **`useWalletStore`** — wagmi connection state mirror (address, isConnected, balances, snapshot).
