@@ -79,7 +79,7 @@ export function Button({
 const palette: Record<ButtonVariant, { container: ViewStyle; textColor: string }> = {
   primary: {
     container: { backgroundColor: colors.brand.primary },
-    textColor: '#0A0B0E',
+    textColor: '#181a20',
   },
   secondary: {
     container: { backgroundColor: colors.bg.tertiary },
